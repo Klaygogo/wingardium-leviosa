@@ -9,15 +9,12 @@ import json
 import csv
 import time
 import paho.mqtt.client as mqtt
+import requests
+import json
 
 # 配置路径
 base_path = "."  # 替换为实际文件夹路径
 folders = ["class1", "class2", "class3", "class4"]  # 每个类别的文件夹名称
-
-# 获取 token 的函数
-import requests
-import json
-
 
 # 获取 token 的函数
 def get_token():
@@ -71,17 +68,7 @@ def get_token():
         print(f"请求失败: {e}")
         return None
 
-
-# 调用示例
-
-
-
-# 模拟获取当前人数的功能
-def get_people():
-    # 这里可以从某个 API 获取当前人数
-    return 10
-
-
+#这里是当识别出动作后调取华为云API进行开门操作，可以自由开发出其他你想实现的功能
 def open_door(location):
     url = 'https://iotda.cn-north-4.myhuaweicloud.com/v5/iot/56b2a2129160465eb5f053e5503221ad/devices/64e05e0ffa9537791d417565_maker/commands'
 
@@ -119,7 +106,9 @@ def open_door(location):
             print(response.text)
     except requests.exceptions.RequestException as e:
         print("请求失败:", e)
-# 数据加载
+
+
+# 加载训练数据
 def load_data(base_path, folders, num_rows_per_sample=100):
     data = []
     labels = []
@@ -326,9 +315,3 @@ if __name__ == "__main__":
     main()
 
 
-
-
-
-
-
-# 调用示例
